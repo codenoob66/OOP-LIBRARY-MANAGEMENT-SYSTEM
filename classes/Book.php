@@ -1,11 +1,11 @@
 <?php
     class Book {
-        private $id;
-        private $title;
-        private $author;
-        private $availableCopies;
+        private int $id;
+        private string $title;
+        private string $author;
+        private int $availableCopies;
 
-        public function __construct($id, $title, $author, $availableCopies)   
+        public function __construct(int $id, string $title, string $author, int $availableCopies)   
         {
             $this->id = $id;
             $this->title = $title;
