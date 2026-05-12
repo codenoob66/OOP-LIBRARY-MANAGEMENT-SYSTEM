@@ -19,6 +19,11 @@
             return $this->title;
         }
 
+        public function getAuthor()
+        {
+            return $this->author;
+        }
+
 
         public function borrowBook()
         {

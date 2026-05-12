@@ -23,21 +23,6 @@
             return $this->name;
         }
 
-
-        // public function returnBook(Book $book)
-        // {
-           
-        //     if(in_array($book, $this->borrowedBooks)) {
-        //         if (($key = array_search($book, $this->borrowedBooks)) !== false) {
-        //         unset($this->borrowedBooks[$key]);
-        //         $this->borrowedBooks = array_values($this->borrowedBooks);
-        //          $book->returnBook();
-        //          return true;
-        //         }
-        //     }
-        //         return false;
-        // }
-
         public function getBorrowedBooks(): array
         {
             return $this->borrowedBooks;
@@ -50,15 +35,27 @@
 
         public function returnBook(Book $book)
         {
-            if(in_array($book, $this->borrowedBooks)){
+            $book_Id = $book->getId();
 
-                if (($key = array_search($book, $this->borrowedBooks)) !== false) {
-                unset($this->borrowedBooks[$key]);
-                $this->borrowedBooks = array_values($this->borrowedBooks);
-                return true;
-
+            foreach($this->borrowedBooks as $key => $borrowedBooks) {
+                if($borrowedBooks->getId() == $book_Id) {
+                    unset($this->borrowedBooks[$key]);
+                    $this->borrowedBooks = array_values($this->borrowedBooks);
+                    return true;
                 }
             }
+                    return false;
+
+            // if(in_array($book_Id, $this->borrowedBooks)){
+
+            //     if (($key = array_search($book_Id, $this->borrowedBooks)) !== false) {
+            //     unset($this->borrowedBooks[$key]);
+            //     $this->borrowedBooks = array_values($this->borrowedBooks);
+            //     return true;
+
+            //     }
+            // }
+            //     return false;
         }
     }
 ?>
