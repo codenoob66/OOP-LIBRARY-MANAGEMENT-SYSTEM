@@ -1,26 +1,36 @@
-<?
+<?php
+    
     class Database
     {
         private $host;
         private $dbname;
         private $username;
         private $password;
+        private $obj;
+        private static $connection = null;
 
 
-        public function __construct($host, $dbname, $username, $password)
+        private function __construct()
         {
-            $this->host = $host;
-            $this->dbname = $dbname;
-            $this->username = $username;
-            $this->password = $password;
+
         }
 
-        public function connect()
+        public static function getConnection()
         {
-            $dsn = "mysql:host=" . $this->host . ";dbname=" . $this->dbname . ";charset=utf8mb4";
-            
-            return new PDO($dsn, $this->username, $this->password);
+            $config = require __DIR__ . '/../config.php';
+
+            try {
+                if(self::$connection === null) {
+                $dsn = "mysql:host=" . $config['host'] . ";dbname=" . $config['dbname'] . ";charset=utf8mb4";
+                self::$connection = new PDO($dsn, $config['username'], $config['password']);
+            }
+                return self::$connection;
+            } catch(PDOException $error) {
+                die("Connection failed: " . $error->getMessage());
+            }
         }
     }
+
+    
 
 ?>

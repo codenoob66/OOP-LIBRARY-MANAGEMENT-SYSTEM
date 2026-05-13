@@ -1,7 +1,14 @@
 <?php
+    
     class BorrowService
     {
+        private PDO $db;
         private int $allowedBooksToBorrow = 5;
+
+        public function __construct(PDO $db)
+        {
+            $this->db = $db;
+        }
 
         public function borrowBook(User $user, Book $book)
         {
