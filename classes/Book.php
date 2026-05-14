@@ -24,23 +24,6 @@
             return $this->author;
         }
 
-
-        public function borrowBook()
-        {
-            if($this->availableCopies > 0)
-            {
-                $this->availableCopies--;
-                return true;
-            }
-
-            return false;
-        }
-
-        public function returnBook()
-        {
-            $this->availableCopies++;
-        }
-
         public function getId()
         {
             return $this->id;
