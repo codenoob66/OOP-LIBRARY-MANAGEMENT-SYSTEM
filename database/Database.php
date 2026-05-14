@@ -2,6 +2,11 @@
     
     class Database
     {
+        // private $host;
+        // private $dbname;
+        // private $username;
+        // private $password;
+        // private $obj;
         private static $connection = null;
         
 
