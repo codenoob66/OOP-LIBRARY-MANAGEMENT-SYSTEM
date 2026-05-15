@@ -13,9 +13,5 @@
     }
     });
 
-    $user = new User('1', "rafael");
-
-    echo $user->getId();
-
 
 ?>
