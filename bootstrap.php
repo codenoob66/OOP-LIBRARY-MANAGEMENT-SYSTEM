@@ -1,7 +1,8 @@
 <?php
     session_start();
     require_once 'config.php';
-    $db = Database::getConnection();
+    
+
     
     spl_autoload_register(function ($className) {
     $directories = ['classes', 'database'];
@@ -18,6 +19,8 @@
 
     
     });
+    
+    $db = Database::getConnection();
 
     $authService = new AuthService($db);
     $borrowService = new BorrowService($db);

@@ -28,5 +28,10 @@
         {
             return $this->id;
         }
+
+        public function getAvailableCopies(): int
+        {
+            return $this->availableCopies;
+        }
     }
 ?>
