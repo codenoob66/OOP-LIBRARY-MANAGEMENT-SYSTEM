@@ -158,15 +158,20 @@
             $stmt->execute();
 
             $bookArray = $stmt->fetchAll(PDO::FETCH_ASSOC);
+            $books = [];
 
-            return $bookArray;
-            
+            foreach($bookArray as $row) {
+                $books[] = new Book($row['id'], $row['title'], $row['author'], $row['available_copies']);
+            }
+
+            return $books;
+    
         }
 
-        public function getBorrowedBooksByUser(User $user): ?array
+        public function getBorrowedBooksByUser(User $user): array
         {
             $stmt = $this->db->prepare(
-                "SELECT book_tbl.id, book_tbl.author, book_tbl.title
+                "SELECT book_tbl.id, book_tbl.author, book_tbl.title, book_tbl.available_copies
                 FROM loan_tbl
                 JOIN book_tbl ON loan_tbl.book_id = book_tbl.id
                 WHERE loan_tbl.user_id = :user_id
@@ -181,11 +186,13 @@
 
             
             $bookArray = $stmt->fetchAll(PDO::FETCH_ASSOC);
+            $books = [];
 
-            if($bookArray) {
-                return $bookArray;
+            foreach($bookArray as $row) {
+                $books[] = new Book($row['id'], $row['title'], $row['author'], $row['available_copies']);
             }
-                return [];
+
+            return $books;
             
         }
     }

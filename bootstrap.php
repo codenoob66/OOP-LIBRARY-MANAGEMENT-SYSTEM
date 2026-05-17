@@ -21,6 +21,7 @@
 
     $authService = new AuthService($db);
     $borrowService = new BorrowService($db);
+    $adminService = new AdminService($db);
 
 
 ?>
