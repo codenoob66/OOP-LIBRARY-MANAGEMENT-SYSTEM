@@ -146,5 +146,47 @@
                 return false;
             }
         }
+
+
+        public function getAllBooks(): array
+        {
+            $stmt = $this->db->prepare(
+                "SELECT id, title, author, available_copies 
+                FROM book_tbl"
+            );
+
+            $stmt->execute();
+
+            $bookArray = $stmt->fetchAll(PDO::FETCH_ASSOC);
+
+            return $bookArray;
+            
+        }
+
+        public function getBorrowedBooksByUser(User $user): ?array
+        {
+            $stmt = $this->db->prepare(
+                "SELECT book_tbl.id, book_tbl.author, book_tbl.title
+                FROM loan_tbl
+                JOIN book_tbl ON loan_tbl.book_id = book_tbl.id
+                WHERE loan_tbl.user_id = :user_id
+                AND loan_tbl.returned_at is NULL"
+            );
+
+
+            $stmt->execute([
+                ':user_id' => $user->getId()
+            ]);
+
+
+            
+            $bookArray = $stmt->fetchAll(PDO::FETCH_ASSOC);
+
+            if($bookArray) {
+                return $bookArray;
+            }
+                return [];
+            
+        }
     }
 ?>
